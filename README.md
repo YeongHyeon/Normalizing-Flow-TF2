@@ -16,12 +16,12 @@ TensorFlow implementation of "Variational Inference with Normalizing Flows" [1]
 ## Results
 
 <div align="center">
-  <img src="./figures/reconstruction.gif" width="600">
+  <img src="./figures/reconstruction.gif" width="800">
   <p><strong>Upper</strong>: target image; <strong>Lower</strong>: restored image.</p>
 </div>
 
 <div align="center">
-  <img src="./figures/energy.gif" width="400">  
+  <img src="./figures/energy.gif" width="600">  
   <p><strong>Left</strong>: first density z_0; <strong>Right</strong>: last density z_k.</p>
 </div>
 
