@@ -23,16 +23,8 @@ class DataSet(object):
 
         num_tr = int(self.x_tr.shape[0] * 0.1)
         self.x_val, self.y_val = self.x_tr[:num_tr], self.y_tr[:num_tr]
-        # self.x_tr, self.y_tr = self.x_tr[num_tr:], self.y_tr[num_tr:]
-        self.x_tr, self.y_tr = self.x_tr[num_tr:][:1000], self.y_tr[num_tr:][:1000]
+        self.x_tr, self.y_tr = self.x_tr[num_tr:], self.y_tr[num_tr:]
         self.x_te, self.y_te = x_te, y_te
-
-        ftxt = open("training_summary.txt", "w")
-        for i in range(10):
-            text = "Class-%d: %5d samples" %(i, np.sum(self.y_tr == i))
-            print(text)
-            ftxt.write("%s\n" %(text))
-        ftxt.close()
 
         self.num_tr, self.num_val, self.num_te = self.x_tr.shape[0], self.x_val.shape[0], self.x_te.shape[0]
         self.dim_h, self.dim_w, self.dim_c = self.x_tr.shape[1], self.x_tr.shape[2], 1
