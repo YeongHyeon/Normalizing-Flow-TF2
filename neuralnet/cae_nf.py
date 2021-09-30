@@ -218,22 +218,23 @@ class Neuralnet(tf.Module):
 
         z_k, sum_det = z_0, None
         for idx_flow in range(self.num_flow):
-
             wz = self.layer.fully_connected(x=z_k, c_out=self.dim_z, \
                 batch_norm=False, activation=None, name="%s-%d-w" %(name, idx_flow), verbose=verbose)
             h = self.layer.activation(x=wz, activation='tanh', name="%s-%d-wb_act" %(name, idx_flow))
             uh = self.layer.fully_connected(x=h, c_out=self.dim_z, \
-                batch_norm=False, activation=None, name="%s-%d-u" %(name, idx_flow), verbose=verbose)
+                batch_norm=False, activation=None, usebias=False, name="%s-%d-u" %(name, idx_flow), verbose=verbose)
             z_k = z_k + uh
-            h_prime = 1 - (wz**2)
+
+            h_prime = 1 - (h**2)
             phi_z = self.layer.fully_connected(x=h_prime, c_out=self.dim_z, \
-                batch_norm=False, activation=None, name="%s-%d-w" %(name, idx_flow), verbose=verbose)
+                batch_norm=False, activation=None, usebias=False, name="%s-%d-w" %(name, idx_flow), verbose=verbose)
             uphi_z = self.layer.fully_connected(x=phi_z, c_out=self.dim_z, \
-                batch_norm=False, activation=None, name="%s-%d-u" %(name, idx_flow), verbose=verbose)
+                batch_norm=False, activation=None, usebias=False, name="%s-%d-u" %(name, idx_flow), verbose=verbose)
 
             det_z_k = tf.math.abs(1 + uphi_z)
             if(sum_det is None): sum_det = tf.math.log(det_z_k + 1e-30)
             else: sum_det += tf.math.log(det_z_k + 1e-30)
+
         ln_q_k = ln_q_0 - sum_det
 
         return z_0, z_k, ln_q_0, ln_q_k, sum_det
