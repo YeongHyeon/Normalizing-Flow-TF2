@@ -29,7 +29,7 @@ TensorFlow implementation of "Variational Inference with Normalizing Flows" [1]
 * Python 3.7.6  
 * Tensorflow 2.3.0  
 * Numpy 1.18.15
-* whiteboxlayer 0.1.17
+* <a href="https://github.com/YeongHyeon/white-box-layer">whiteboxlayer</a> 0.1.18
 
 ## Reference
 [1] Danilo Jimenez Rezende and Shakir Mohamed. (2015). <a href="https://arxiv.org/abs/1505.05770">Variational Inference with Normalizing Flows</a>. arXiv preprint arXiv:1505.05770.
